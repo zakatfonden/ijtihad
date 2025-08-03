@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Arabiske overskrifter fra dit billede
+# Arabiske overskrifter fra dit billede, men med unikke navne
 kolonne_overskrifter = [
     'رقم',
     'الاسم',
     'الكتاب المعاصر',
-    'اسم المؤلف',
+    'اسم المؤلف (معاصر)', # Unikt navn for forfatteren af den moderne bog
     'الكتاب القديم',
-    'اسم المؤلف'
+    'اسم المؤلف (قديم)'    # Unikt navn for forfatteren af den klassiske bog
 ]
 
 # Initialiser data til 14 rækker med tomme strenge
@@ -24,16 +24,12 @@ if 'df' not in st.session_state:
 
 st.title("Tabel til redigering")
 st.write("Dobbeltklik på en celle for at redigere dens indhold.")
+st.write("Kolonnenavnene 'اسم المؤلف' er blevet ændret for at være unikke, som krævet af Streamlit.")
 
 # Viser data-editoren
-# 'key' er nødvendig for at bevare ændringer korrekt med session_state
 redigeret_df = st.data_editor(st.session_state['df'], num_rows="fixed")
 
 # Opdater session_state med de ændrede data
 st.session_state['df'] = redigeret_df
 
 st.write("Ændringer gemmes automatisk og bevares ved genindlæsning af siden.")
-
-# Du kan tilføje yderligere kode her, hvis du vil gemme data permanent
-# For eksempel til en CSV-fil, database osv.
-# st.download_button(...)
